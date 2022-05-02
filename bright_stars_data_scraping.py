@@ -2,14 +2,14 @@ from bs4 import BeautifulSoup as bs
 import requests
 import pandas as pd
 
-# URLto Scrape Data
+# URL a los datos a extraer
 bright_stars_url = 'https://en.wikipedia.org/wiki/List_of_brightest_stars_and_other_record_stars'
 
-# Get Page
+# Obtener página
 page = requests.get(bright_stars_url)
 print(page)
 
-# Parse Page
+# Analizar página
 soup = bs(page.text,'html.parser')
 
 star_table = soup.find('table')
@@ -35,7 +35,7 @@ for i in range(1,len(temp_list)):
     Radius.append(temp_list[i][6])
     Lum.append(temp_list[i][7])
 
-# Convert to CSV
+# Convertir a CSV
 headers = ['Star_name','Distance','Mass','Radius','Luminosity']    
 df2 = pd.DataFrame(list(zip(Star_names,Distance,Mass,Radius,Lum)),columns=headers)
 print(df2)
